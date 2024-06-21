@@ -5,6 +5,7 @@ import {
 import Home from "../Pages/Home";
 import Authenticate from "../Pages/public/Authenticate";
 import Account from "../Pages/private/Account";
+import ListOfItems from "../Pages/private/ListOfItems";
 
 const RoutesProvider = () => {
 
@@ -20,6 +21,10 @@ const RoutesProvider = () => {
     {
       path: "/account",
       element: <Account />,
+    },
+    {
+      path: "/lista-de-itens",
+      element: <ListOfItems />,
     }
   ]);
 
