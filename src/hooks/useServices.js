@@ -1,7 +1,7 @@
 import useMe from "./useMe";
 import { v4 as uuidv4 } from "uuid";
 
-const useServices = () => {
+const useServices = (setServices) => {
   const me = useMe();
 
   const findAll = (filter) => {
@@ -24,6 +24,7 @@ const useServices = () => {
 
     service.id = uuidv4();
     service.companyId = me.id;
+    service.likes = 0;
 
     services.push(service);
 
@@ -56,7 +57,20 @@ const useServices = () => {
     return services.filter((service) => service.companyId === me.id);
   };
 
-  return { findAll, findOne, create, update, remove };
+  const like = (id) => {
+    const services = JSON.parse(localStorage.getItem("services"));
+
+    const index = services.findIndex((service) => service.id === id);
+
+    services[index].likes = services[index].likes + 1;
+
+    localStorage.setItem("services", JSON.stringify(services));
+
+    setServices(services);
+    return services;
+  };
+
+  return { findAll, findOne, create, update, remove, like };
 };
 
 export default useServices;

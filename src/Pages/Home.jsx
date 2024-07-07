@@ -1,11 +1,60 @@
+import { useEffect, useState } from "react";
 import Cta from "../components/CTA";
 import Header from "../components/Header";
+import useServices from "../hooks/useServices";
+import { FcLike } from "react-icons/fc";
+import useCompanies from "../hooks/useCompanies";
+import { MdShoppingCartCheckout } from "react-icons/md";
+import Modal from "../components/Modal";
+import transformCurrency from "../utils/transformCurrency";
 
 export default function Home() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [services, setServices] = useState([]);
+
+  const [servicesSelecteds, setServicesSelecteds] = useState([]);
+
+  const { findAll, like } = useServices(setServices);
+  const { findAll: findAllCompanies } = useCompanies();
+
+  useEffect(() => {
+    setServices(findAll());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const sumTotalValue = () => {
+    return servicesSelecteds.reduce((acc, item) => acc + item.valor, 0);
+  };
+
   return (
     <body className="">
       <Header></Header>
       <main>
+        <button
+          onClick={() => setModalOpen(true)}
+          className="cursor-pointer px-4 py-2 rounded-r-lg bg-blue-primary shadow-2xl shadow-black fixed z-30"
+        >
+          <MdShoppingCartCheckout className="text-2xl" />
+        </button>
+        <Modal
+          isOpen={modalOpen}
+          onClose={() => setModalOpen(false)}
+          className={"max-w-fit min-w-[375px] min-h-[375px] bg-slate-700"}
+        >
+          <div className="">
+            {servicesSelecteds.map((item) => (
+              <div key={item.id} className="py-2 border-b border-solid">
+                <p>{item.nome}</p>
+                <p>{transformCurrency(item.valor)}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="w-full pt-10 mt-10 flex justify-between">
+            <p>Total de itens: {servicesSelecteds?.length}</p>
+            <p>Valor Total: {transformCurrency(sumTotalValue())}</p>
+          </div>
+        </Modal>
         <Cta className={"bg-white"}>
           <Cta.Container>
             <div className="flex flex-col text-blue-primary">
@@ -54,54 +103,31 @@ export default function Home() {
               </Cta.Description>
             </div>
             <div className="grid grid-cols-3 gap-4 ">
-              <div className={"flex flex-col items-center"}>
-                <Cta.Image
-                  className={"max-w-[200px] mt-4"}
-                  src="./public/IMG.png"
-                  alt="Cta Image"
-                />
-                <p className={"text-blue-primary"}>oi</p>
-              </div>
-              <div className={"flex flex-col items-center"}>
-                <Cta.Image
-                  className={"max-w-[200px] mt-4"}
-                  src="./public/IMG.png"
-                  alt="Cta Image"
-                />
-                <p className={"text-blue-primary"}>oi</p>
-              </div>
-              <div className={"flex flex-col items-center"}>
-                <Cta.Image
-                  className={"max-w-[200px] mt-4"}
-                  src="./public/IMG.png"
-                  alt="Cta Image"
-                />
-                <p className={"text-blue-primary"}>oi</p>
-              </div>
-              <div className={"flex flex-col items-center"}>
-                <Cta.Image
-                  className={"max-w-[200px] mt-4"}
-                  src="./public/IMG.png"
-                  alt="Cta Image"
-                />
-                <p className={"text-blue-primary"}>oi</p>
-              </div>
-              <div className={"flex flex-col items-center"}>
-                <Cta.Image
-                  className={"max-w-[200px] mt-4"}
-                  src="./public/IMG.png"
-                  alt="Cta Image"
-                />
-                <p className={"text-blue-primary"}>oi</p>
-              </div>
-              <div className={"flex flex-col items-center"}>
-                <Cta.Image
-                  className={"max-w-[200px] mt-4"}
-                  src="./public/IMG.png"
-                  alt="Cta Image"
-                />
-                <p className={"text-blue-primary"}>oi</p>
-              </div>
+              {services.map((item) => (
+                <div
+                  key={item.id}
+                  className="flex flex-col items-center"
+                  onClick={() =>
+                    setServicesSelecteds((prev) => [...prev, item])
+                  }
+                >
+                  <Cta.Image
+                    className={"!w-[260px] h-[270px] mt-4"}
+                    src={item.image}
+                    alt="Cta Image"
+                  />
+                  <p className={"text-blue-primary"}>{item.nome}</p>
+                  <p className={"text-blue-primary font-bold"}>
+                    {transformCurrency(item.valor)}
+                  </p>
+                  <button
+                    onClick={() => like(item.id)}
+                    className="text-blue-primary flex items-center gap-2"
+                  >
+                    <FcLike /> <span>{item?.likes}</span>
+                  </button>
+                </div>
+              ))}
             </div>
           </Cta.Container>
         </Cta>
@@ -132,14 +158,14 @@ export default function Home() {
                     " bg-white text-blue-primary rounded-full w-[150px] h-[150px] flex items-center justify-center font-bold"
                   }
                 >
-                  +300 serviços
+                  +{services.length || 0} serviços
                 </p>
                 <p
                   className={
                     " bg-white text-blue-primary rounded-full w-[150px] h-[150px] flex items-center justify-center font-bold "
                   }
                 >
-                  +50 parceiros
+                  +{findAllCompanies().length || 0} parceiros
                 </p>
                 <p
                   className={

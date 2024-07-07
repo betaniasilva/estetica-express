@@ -6,13 +6,14 @@ import InputField from "../../FormFields/InputField";
 import CardItem from "../../CardItem";
 import TextAreaField from "../../FormFields/TextAreaField";
 import Modal from "../../Modal";
+import transformCurrency from "../../../utils/transformCurrency";
 
 const UpdateModalService = ({ service, setServices, isOpen, onClose }) => {
   const form = useForm({
     defaultValues: {
       nome: service.nome,
       descricao: service.descricao,
-      valor: service.valor,
+      valor: transformCurrency(service.valor),
       image: service.image,
     },
   });
@@ -27,7 +28,7 @@ const UpdateModalService = ({ service, setServices, isOpen, onClose }) => {
   });
 
   useEffect(() => {
-    form.reset({ ...service });
+    form.reset({ ...service, valor: transformCurrency(service.valor) });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [service]);
 
