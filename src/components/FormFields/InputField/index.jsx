@@ -23,7 +23,7 @@ const InputField = ({ name, label, className, type, ...props }) => {
 
   return (
     <div className="flex flex-col gap-2">
-      {label && <label>{label}</label>}
+      {label && <label className="px-4">{label}</label>}
       <div
         className={`${className} flex text-base items-center rounded-2xl justify-between w-full`}
       >
@@ -32,7 +32,7 @@ const InputField = ({ name, label, className, type, ...props }) => {
           {...field}
           {...props}
           type={isPassword && isEyeOpen ? "text" : type}
-          className={`!bg-transparent w-full  px-4 py-2`}
+          className={`!bg-transparent w-full px-4 py-2`}
         />
         {isPassword && (
           <button onClick={handleTogglePassword} className="p-2">

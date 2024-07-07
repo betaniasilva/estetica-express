@@ -1,0 +1,35 @@
+.react-responsive-modal-modal {
+  background-color: rgb(27, 86, 104);
+  border-radius: 8px;
+}
+
+.form-container {
+  background-color: rgb(27, 86, 104);
+  padding: 32px;
+  border-radius: 8px;
+}
+
+form {
+  display: flex;
+  gap: 16px;
+  width: 75%;
+  min-width: 375px;
+  margin: 0 auto;
+
+  flex-direction: column;
+}
+
+button {
+  padding: 16px 32px;
+  color: black;
+}
+
+.form-container .delete-confirmar {
+  background-color: red;
+  color: white;
+  margin-right: 8px;
+}
+
+.form-container .delete-cancelar {
+  margin-left: 8px;
+}

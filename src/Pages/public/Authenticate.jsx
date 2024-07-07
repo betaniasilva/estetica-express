@@ -5,9 +5,12 @@ import Header from "../../components/Header";
 import { useState } from "react";
 import Button from "../../components/UI/Button";
 import InputField from "../../components/FormFields/InputField";
+import useAuthenticate from "../../hooks/useAuthenticate";
 
 export default function Authenticate() {
   const [isLogin, setIsLogin] = useState(true);
+
+  const { authenticate } = useAuthenticate();
 
   const form = useForm({
     defaultValues: {
@@ -19,24 +22,13 @@ export default function Authenticate() {
 
   const handleAuthenticate = form.handleSubmit((data) => {
     if (isLogin) {
-      //TODO - Implementar a chamada para a API
-      const user = db().find(
-        (item) => item.email === data.email && item.password === data.password
-      );
+      const user = authenticate(data.email, data.password);
 
       if (user) {
-        toast.success("Usuário logado com sucesso", {
-          position: "top-left",
-          autoClose: 3000,
-        });
-        window.location.href = "/lista-de-itens";
         return;
       }
 
-      return toast.error("Usuário ou senha inválidos", {
-        position: "top-left",
-        autoClose: 3000,
-      });
+      return;
     }
 
     const user = db().push({ ...data });
