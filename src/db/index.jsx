@@ -1,5 +1,5 @@
 const db = () => {
-  const data = [
+  const users = [
     {
       "id": 1,
       "email": "teste@hotmail.com",
@@ -8,7 +8,7 @@ const db = () => {
   ]
   
 
-  return data
+  return users
 }
 
 export default db
