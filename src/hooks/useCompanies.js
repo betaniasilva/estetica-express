@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from "uuid";
+
 const useCompanies = () => {
   const findAll = (filter) => {
     const companies = JSON.parse(localStorage.getItem("companies"));
@@ -16,6 +18,8 @@ const useCompanies = () => {
 
   const create = (company) => {
     const companies = JSON.parse(localStorage.getItem("companies"));
+
+    company.id = uuidv4();
 
     companies.push(company);
 

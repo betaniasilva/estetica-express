@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from "uuid";
+
 const useUsers = () => {
   const findAll = (filter) => {
     const users = JSON.parse(localStorage.getItem("users"));
@@ -17,6 +19,7 @@ const useUsers = () => {
   const create = (user) => {
     const users = JSON.parse(localStorage.getItem("users"));
 
+    users.id = uuidv4();
     users.push(user);
 
     localStorage.setItem("users", JSON.stringify(users));

@@ -4,7 +4,14 @@ import PropTypes from "prop-types";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import Input from "../../UI/Input";
 
-const InputField = ({ name, label, className, type, ...props }) => {
+const InputField = ({
+  name,
+  label,
+  className,
+  classNameInput,
+  type,
+  ...props
+}) => {
   const [isEyeOpen, setIsEyeOpen] = useState(false);
 
   const isPassword = type === "password";
@@ -23,7 +30,7 @@ const InputField = ({ name, label, className, type, ...props }) => {
 
   return (
     <div className="flex flex-col gap-2">
-      {label && <label className="px-4">{label}</label>}
+      {label && <label>{label}</label>}
       <div
         className={`${className} flex text-base items-center rounded-2xl justify-between w-full`}
       >
@@ -32,7 +39,7 @@ const InputField = ({ name, label, className, type, ...props }) => {
           {...field}
           {...props}
           type={isPassword && isEyeOpen ? "text" : type}
-          className={`!bg-transparent w-full px-4 py-2`}
+          className={`w-full px-4 py-2 ${classNameInput || "!bg-transparent"}`}
         />
         {isPassword && (
           <button onClick={handleTogglePassword} className="p-2">
@@ -49,6 +56,7 @@ InputField.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string,
   className: PropTypes.string,
+  classNameInput: PropTypes.string,
   type: PropTypes.string,
 };
 

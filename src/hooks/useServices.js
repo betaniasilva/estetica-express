@@ -1,4 +1,5 @@
 import useMe from "./useMe";
+import { v4 as uuidv4 } from "uuid";
 
 const useServices = () => {
   const me = useMe();
@@ -20,6 +21,9 @@ const useServices = () => {
 
   const create = (service) => {
     const services = JSON.parse(localStorage.getItem("services"));
+
+    service.id = uuidv4();
+    service.companyId = me.id;
 
     services.push(service);
 
