@@ -8,7 +8,9 @@ const Header = ({ me }) => {
 
   return (
     <header className="w-full h-20 bg-blue-primary flex justify-between items-center p-10">
-      <img src="./public/logo.svg" alt="logo" className={"max-w-[200px] "} />
+      <a href="/">
+        <img src="./public/logo.svg" alt="logo" className={"max-w-[200px] "} />
+      </a>
 
       {me ? (
         <div className="flex flex-col">
