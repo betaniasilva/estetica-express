@@ -16,7 +16,7 @@ const TextAreaField = ({ name, label, className, ...props }) => {
         name={name}
         {...field}
         {...props}
-        className={`w-full px-4 py-2 text-base rounded-2xl outline-none ${
+        className={`resize-none w-full px-4 py-2 text-base rounded-2xl outline-none ${
           className || "!bg-transparent"
         }`}
       />

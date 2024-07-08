@@ -5,8 +5,9 @@ import InputField from "../../FormFields/InputField";
 import CardItem from "../../CardItem";
 import TextAreaField from "../../FormFields/TextAreaField";
 import Modal from "../../Modal";
+import CurrencyInputField from "../../FormFields/CurrencyInputField";
 
-const CreateModalService = ({ setServices, isOpen, onClose }) => {
+const ModalCreateService = ({ setServices, isOpen, onClose }) => {
   const form = useForm({
     defaultValues: {
       nome: "",
@@ -48,7 +49,7 @@ const CreateModalService = ({ setServices, isOpen, onClose }) => {
                 maxLength={200}
                 className="h-48 text-blue-primary bg-white"
               />
-              <InputField
+              <CurrencyInputField
                 label={"Valor: "}
                 name={"valor"}
                 classNameInput={"bg-white"}
@@ -82,10 +83,10 @@ const CreateModalService = ({ setServices, isOpen, onClose }) => {
   );
 };
 
-CreateModalService.propTypes = {
+ModalCreateService.propTypes = {
   setServices: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
 };
 
-export default CreateModalService;
+export default ModalCreateService;

@@ -20,6 +20,7 @@ const useUsers = () => {
     const users = JSON.parse(localStorage.getItem("users"));
 
     users.id = uuidv4();
+
     users.push(user);
 
     localStorage.setItem("users", JSON.stringify(users));

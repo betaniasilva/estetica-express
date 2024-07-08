@@ -7,8 +7,9 @@ import CardItem from "../../CardItem";
 import TextAreaField from "../../FormFields/TextAreaField";
 import Modal from "../../Modal";
 import transformCurrency from "../../../utils/transformCurrency";
+import CurrencyInputField from "../../FormFields/CurrencyInputField";
 
-const UpdateModalService = ({ service, setServices, isOpen, onClose }) => {
+const ModalUpdateService = ({ service, setServices, isOpen, onClose }) => {
   const form = useForm({
     defaultValues: {
       nome: service.nome,
@@ -54,7 +55,7 @@ const UpdateModalService = ({ service, setServices, isOpen, onClose }) => {
                 maxLength={200}
                 className="h-48 text-blue-primary bg-white"
               />
-              <InputField
+              <CurrencyInputField
                 label={"Valor: "}
                 name={"valor"}
                 classNameInput={"bg-white"}
@@ -88,11 +89,11 @@ const UpdateModalService = ({ service, setServices, isOpen, onClose }) => {
   );
 };
 
-UpdateModalService.propTypes = {
+ModalUpdateService.propTypes = {
   service: PropTypes.object.isRequired,
   setServices: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
 };
 
-export default UpdateModalService;
+export default ModalUpdateService;

@@ -1,5 +1,6 @@
 import useMe from "./useMe";
 import { v4 as uuidv4 } from "uuid";
+import { toast } from "react-toastify";
 
 const useServices = (setServices) => {
   const me = useMe();
@@ -30,6 +31,11 @@ const useServices = (setServices) => {
 
     localStorage.setItem("services", JSON.stringify(services));
 
+    toast.success("Serviço cadastrado com sucesso", {
+      position: "bottom-right",
+      autoClose: 3000,
+    });
+
     return services.filter((service) => service.companyId === me.id);
   };
 
@@ -42,6 +48,11 @@ const useServices = (setServices) => {
 
     localStorage.setItem("services", JSON.stringify(services));
 
+    toast.success("Serviço atualizado com sucesso", {
+      position: "bottom-right",
+      autoClose: 3000,
+    });
+
     return services.filter((service) => service.companyId === me.id);
   };
 
@@ -53,6 +64,11 @@ const useServices = (setServices) => {
     services.splice(index, 1);
 
     localStorage.setItem("services", JSON.stringify(services));
+
+    toast.success("Serviço removido com sucesso", {
+      position: "bottom-right",
+      autoClose: 3000,
+    });
 
     return services.filter((service) => service.companyId === me.id);
   };
