@@ -10,9 +10,9 @@ import {
   MdOutlineAddShoppingCart,
   MdShoppingCartCheckout,
 } from "react-icons/md";
-import Modal from "../components/Modal";
 import transformCurrency from "../utils/transformCurrency";
-import { FaQuoteLeft } from "react-icons/fa";
+import { toast } from "react-toastify";
+import Checkout from "../components/Checkout";
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -28,10 +28,6 @@ export default function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const sumTotalValue = () => {
-    return servicesSelecteds.reduce((acc, item) => acc + item.valor, 0);
-  };
-
   return (
     <body className="">
       <Header></Header>
@@ -42,25 +38,13 @@ export default function Home() {
         >
           <MdShoppingCartCheckout className="text-2xl" />
         </button>
-        <Modal
-          isOpen={modalOpen}
-          onClose={() => setModalOpen(false)}
-          className={"max-w-fit min-w-[375px] min-h-[375px] bg-slate-700"}
-        >
-          <div className="">
-            {servicesSelecteds.map((item) => (
-              <div key={item.id} className="py-2 border-b border-solid">
-                <p>{item.nome}</p>
-                <p>{transformCurrency(item.valor)}</p>
-              </div>
-            ))}
-          </div>
+        <Checkout
+          items={servicesSelecteds}
+          setItems={setServicesSelecteds}
+          modalOpen={modalOpen}
+          setModalOpen={() => setModalOpen(false)}
+        />
 
-          <div className="w-full pt-10 mt-10 flex justify-between">
-            <p>Total de itens: {servicesSelecteds?.length}</p>
-            <p>Valor Total: {transformCurrency(sumTotalValue())}</p>
-          </div>
-        </Modal>
         <Cta className={"bg-white"}>
           <Cta.Container>
             <div className="flex flex-col text-blue-primary">
@@ -133,9 +117,13 @@ export default function Home() {
                     </button>
                     <button
                       className="text-white flex items-center gap-2"
-                      onClick={() =>
-                        setServicesSelecteds((prev) => [...prev, item])
-                      }
+                      onClick={() => {
+                        setServicesSelecteds((prev) => [...prev, item]);
+                        toast.success("Serviço adicionado ao carrinho", {
+                          position: "bottom-right",
+                          autoClose: 3000,
+                        });
+                      }}
                     >
                       <MdOutlineAddShoppingCart />
                     </button>

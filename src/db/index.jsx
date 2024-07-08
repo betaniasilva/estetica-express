@@ -39,7 +39,7 @@ const db = () => {
 
   const services = [
     {
-      id: 1,
+      id: "1",
       nome: "Manicure Simples",
       descricao:
         "Serviço de manicure simples, incluindo corte e lixamento de unhas.",
@@ -50,7 +50,7 @@ const db = () => {
       likes: 0,
     },
     {
-      id: 2,
+      id: "2",
       nome: "Pedicure Completo",
       descricao:
         "Tratamento completo para os pés, incluindo esfoliação e hidratação.",
@@ -61,7 +61,7 @@ const db = () => {
       likes: 0,
     },
     {
-      id: 3,
+      id: "3",
       nome: "Corte de Cabelo Feminino",
       descricao: "Corte de cabelo feminino com lavagem e escova.",
       valor: 70,
@@ -71,7 +71,7 @@ const db = () => {
       likes: 0,
     },
     {
-      id: 4,
+      id: "4",
       nome: "Tintura de Cabelo",
       descricao: "Serviço de tintura de cabelo com produtos de alta qualidade.",
       valor: 120,
@@ -81,7 +81,7 @@ const db = () => {
       likes: 0,
     },
     {
-      id: 5,
+      id: "5",
       nome: "Escova Progressiva",
       descricao: "Tratamento de escova progressiva para alisamento de cabelo.",
       valor: 150,
@@ -91,7 +91,7 @@ const db = () => {
       likes: 0,
     },
     {
-      id: 6,
+      id: "6",
       nome: "Hidratação Capilar",
       descricao: "Tratamento de hidratação profunda para cabelos ressecados.",
       valor: 80,
@@ -101,7 +101,7 @@ const db = () => {
       likes: 0,
     },
     {
-      id: 7,
+      id: "7",
       nome: "Design de Sobrancelhas",
       descricao: "Design e limpeza de sobrancelhas.",
       valor: 40,
@@ -111,7 +111,7 @@ const db = () => {
       likes: 0,
     },
     {
-      id: 8,
+      id: "8",
       nome: "Depilação a Laser",
       descricao: "Sessão de depilação a laser para áreas específicas.",
       valor: 200,
@@ -121,7 +121,7 @@ const db = () => {
       likes: 0,
     },
     {
-      id: 9,
+      id: "9",
       nome: "Massagem Relaxante",
       descricao: "Sessão de massagem relaxante para alívio do estresse.",
       valor: 100,
@@ -131,7 +131,7 @@ const db = () => {
       likes: 0,
     },
     {
-      id: 10,
+      id: "10",
       nome: "Maquiagem para Festas",
       descricao: "Serviço de maquiagem profissional para eventos e festas.",
       valor: 85,
