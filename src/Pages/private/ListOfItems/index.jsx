@@ -47,7 +47,10 @@ const ListOfItems = () => {
               placeholder="Filtro: "
               onChange={handleFilter}
             />
-            <Button onClick={() => setCreateModalServiceIsOpne(true)}>
+            <Button
+              className={"bg-white font-bold"}
+              onClick={() => setCreateModalServiceIsOpne(true)}
+            >
               Cadastrar Serviço +
             </Button>
             <ModalCreateService

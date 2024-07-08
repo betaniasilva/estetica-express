@@ -1,88 +1,124 @@
 import { FormProvider, useForm } from "react-hook-form";
-import db from "../../db";
-import { toast } from "react-toastify";
 import Header from "../../components/Header";
 import { useState } from "react";
 import Button from "../../components/UI/Button";
 import InputField from "../../components/FormFields/InputField";
 import useAuthenticate from "../../hooks/useAuthenticate";
+import useUsers from "../../hooks/useUsers";
+import useCompanies from "../../hooks/useCompanies";
+import cn from "../../utils/cn";
 
 export default function Authenticate() {
   const [isLogin, setIsLogin] = useState(true);
 
   const { authenticate } = useAuthenticate();
 
+  const { create: createUser } = useUsers();
+  const { create: createCompany } = useCompanies();
+
   const form = useForm({
     defaultValues: {
       email: "teste@hotmail.com",
       password: "123456",
       phone: "9999-9999",
+      name: "Manicure",
+      type: null,
     },
   });
 
   const handleAuthenticate = form.handleSubmit((data) => {
     if (isLogin) {
-      const user = authenticate(data.email, data.password);
-
-      if (user) {
-        return;
-      }
-
-      return;
+      return authenticate(data.email, data.password);
     }
-
-    const user = db().push({ ...data });
-
-    if (user) {
-      toast.success("Usuário cadastrado com sucesso", {
-        position: "top-left",
-        autoClose: 3000,
-      });
-      // window.location.href = '/account'
-      return;
+    if (data?.type === "company") {
+      createCompany(data);
+      authenticate(data.email, data.password);
+    } else {
+      createUser(data);
+      authenticate(data.email, data.password);
     }
-
-    return toast.error("Erro no cadastro do usuário", {
-      position: "top-left",
-      autoClose: 3000,
-    });
   });
 
   return (
     <>
       <Header />
-      <main className="max-w-full w-screen h-screen overflow-hidden flex flex-col justify-center items-center">
-        <div className="bg-white flex item-center max-w-2xl max-h-fit w-full px-4 py-20 rounded-lg">
-          <Button onClick={() => setIsLogin(true)} className="">
-            Login
-          </Button>
-          <Button onClick={() => setIsLogin(false)} className="">
-            Cadastro do usuário
-          </Button>
-        </div>
+      <main className="bg-white max-w-full w-screen h-screen overflow-hidden flex flex-col justify-center items-center">
+        <div className="max-w-2xl max-h-fit w-full px-4 py-20 shadow-black shadow-2xl rounded-lg">
+          <div className="flex item-center">
+            <Button
+              onClick={() => setIsLogin(true)}
+              className={cn(
+                "transition-all duration-100 font-bold w-full rounded-r-none",
+                {
+                  "bg-blue-primary text-white": !isLogin,
+                  "bg-transparent border border-solid border-blue-primary text-blue-primary":
+                    isLogin,
+                }
+              )}
+            >
+              Login
+            </Button>
+            <Button
+              onClick={() => setIsLogin(false)}
+              className={cn(
+                "transition-all duration-100 font-bold w-full rounded-l-none",
+                {
+                  "bg-blue-primary text-white": isLogin,
+                  "bg-transparent border border-solid border-blue-primary text-blue-primary":
+                    !isLogin,
+                }
+              )}
+            >
+              Cadastro do usuário
+            </Button>
+          </div>
 
-        <div className="max-w-2xl max-h-fit w-full bg-white px-4 py-20 rounded-lg">
           <FormProvider {...form}>
-            <form className="flex flex-col gap-4 m-auto max-w-80 text-black">
-              <h1 className="text-2xl font-bold">Login</h1>
+            <form className="mt-10 flex flex-col gap-4 mx-auto max-w-80 text-black">
+              <h1 className="text-2xl font-bold">
+                {isLogin ? "Login" : "Cadastrar"}
+              </h1>
+              {!isLogin && (
+                <InputField
+                  name={"name"}
+                  className="bg-transparent border border-solid border-blue-primary placeholder:text-black"
+                />
+              )}
               <InputField
                 name={"email"}
-                className="bg-gray-400 placeholder:text-black"
+                className="bg-transparent border border-solid border-blue-primary placeholder:text-black"
               />
               <InputField
                 name={"password"}
                 type={"password"}
-                className="bg-gray-400 placeholder:text-black"
+                className="bg-transparent border border-solid border-blue-primary placeholder:text-black"
               />
               {!isLogin && (
-                <InputField
-                  name={"password"}
-                  className="bg-gray-400 placeholder:text-black"
-                />
+                <div className="flex items-center gap-10">
+                  <div className="flex items-center gap-2">
+                    <input
+                      {...form.register("type")}
+                      id="user"
+                      type="radio"
+                      value="user"
+                    />
+                    <label htmlFor="user">Usuário</label>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <input
+                      {...form.register("type")}
+                      id="company"
+                      type="radio"
+                      value="company"
+                    />
+                    <label htmlFor="company">Empresa</label>
+                  </div>
+                </div>
               )}
+
               <button
                 onClick={handleAuthenticate}
-                className="bg-slate-400 p-2 rounded-lg"
+                className="bg-blue-primary text-white p-2 rounded-lg font-bold"
               >
                 {isLogin ? "Login" : "Cadastrar"}
               </button>
