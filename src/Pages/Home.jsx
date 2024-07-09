@@ -56,7 +56,7 @@ export default function Home() {
               </Cta.Description>
             </div>
             <Cta.Image
-              className={"max-w-full h-auto mt-4"}
+              className={" max-w-[300px] sm:max-w-full sm:max-h-full  mt-4"}
               src="./public/IMG.png"
               alt="Cta Image"
             />
@@ -71,7 +71,7 @@ export default function Home() {
               alt="Cta Image"
             />
             <div className="flex flex-col">
-              <Cta.Title className={"max-w-[600px] mb-4"}>
+              <Cta.Title className={"max-w-[600px] mb-4 "}>
                 Faça seus agendamentos de forma prática!
               </Cta.Title>
               <Cta.Description>
@@ -84,7 +84,7 @@ export default function Home() {
         <Cta className={"bg-white"}>
           <Cta.Container className={"flex-col"}>
             <div className=" text-blue-primary">
-              <Cta.Title className={" mb-4 uppercase text-center"}>
+              <Cta.Title className={" mb-4 uppercase lg:text-center"}>
                 Alguns de nossos serviços!{" "}
               </Cta.Title>
               <Cta.Description className={"mb-8"}>
@@ -143,7 +143,7 @@ export default function Home() {
         <Cta className={"bg-blue-primary"}>
           <Cta.Container>
             <Cta.Image
-              className={"max-w-[500px] h-auto mt-4 mb-4"}
+              className={"max-w-[300px] sm:max-w-[500px] h-auto mt-4 mb-4"}
               src="./public/quem.svg"
               alt="Cta Image"
             />
@@ -151,7 +151,9 @@ export default function Home() {
               <Cta.Title className={"max-w-[750px] mb-4 text-center "}>
                 Sobre nós
               </Cta.Title>
-              <Cta.Description className={" max-w-[650px] mb-4 text-center "}>
+              <Cta.Description
+                className={" max-w-[650px] mb-4 text-center px-2"}
+              >
                 Somos uma rede que une pessoas com vidas corridas no trabalho, e
                 que amam a praticidade. Nosso objetivo é de tornar seus dias
                 mais práticos, sem correrias, sem ligações ou conversas no
@@ -200,7 +202,7 @@ export default function Home() {
               <Cta.Description>
                 Comentários e histórias de sucesso de clientes satisfeitos.
               </Cta.Description>
-              <div className="grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-4 mt-8 ">
+              <div className="grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-4 mt-8 mx-4 ">
                 <Avaliacoes
                   text={
                     "Adoro a facilidade com que posso agendar meus tratamentos de beleza na Search Estética. O site é intuitivo e me permite ver todas as opções disponíveis rapidamente. Eu posso escolher o serviço, o horário e o profissional de minha preferência com apenas alguns cliques. É realmente conveniente!"

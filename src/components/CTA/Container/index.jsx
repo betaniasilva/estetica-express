@@ -6,7 +6,7 @@ const Container = ({ children, className, ...rest }) => {
     <div
       {...rest}
       className={cn(
-        "max-w-[1400px] mx-auto h-full px-4 py-10 flex justify-center items-center flex-wrap",
+        "max-w-[1400px] mx-auto h-full p-10 flex justify-center items-center flex-wrap",
         "lg:justify-between lg:flex-nowrap",
         className
       )}
