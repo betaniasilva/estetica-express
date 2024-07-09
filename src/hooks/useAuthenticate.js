@@ -8,10 +8,6 @@ const useAuthenticate = () => {
     const users = JSON.parse(localStorage.getItem("users"));
     const companies = JSON.parse(localStorage.getItem("companies"));
 
-    console.log("username", username);
-    console.log("password", password);
-    console.log("password", password);
-
     const user =
       users.find((user) => user.email === username) ||
       companies.find((company) => company.email === username);

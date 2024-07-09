@@ -9,8 +9,8 @@ const Checkout = ({ items, setItems, modalOpen, setModalOpen }) => {
     return items.reduce((acc, item) => acc + Number(item.valor), 0);
   };
 
-  const handleRemoveItem = (id) => {
-    setItems((prev) => prev.filter((item) => item.id !== id));
+  const handleRemoveItem = (index) => {
+    setItems((prev) => prev.filter((_, i) => i !== index));
   };
 
   return (
@@ -25,9 +25,9 @@ const Checkout = ({ items, setItems, modalOpen, setModalOpen }) => {
         })}
       >
         <div className="flex-1 overflow-auto ">
-          {items.map((item) => (
+          {items.map((item, i) => (
             <div
-              key={item.id}
+              key={item.i}
               className="py-2 border-b border-solid flex justify-between items-center"
             >
               <div>
@@ -35,7 +35,7 @@ const Checkout = ({ items, setItems, modalOpen, setModalOpen }) => {
                 <p>{transformCurrency(item.valor)}</p>
               </div>
               <button
-                onClick={() => handleRemoveItem(item.id)}
+                onClick={() => handleRemoveItem(i)}
                 className="flex items-center justify-center hover:bg-slate-400 hover:text-red-700 w-8 h-8 rounded-full text-red-600"
               >
                 <FaTrash />

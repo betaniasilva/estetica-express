@@ -4,8 +4,6 @@ import PropType from "prop-types";
 const Header = ({ me }) => {
   const { logout } = useAuthenticate();
 
-  console.log(me);
-
   return (
     <header className="w-full h-20 bg-blue-primary flex justify-between items-center p-10">
       <a href="/">

@@ -1,6 +1,7 @@
 import useMe from "./useMe";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
+import { transformMoneyToNumber } from "../utils/transformMoneyToNumber";
 
 const useServices = (setServices) => {
   const me = useMe();
@@ -26,6 +27,7 @@ const useServices = (setServices) => {
     service.id = uuidv4();
     service.companyId = me.id;
     service.likes = 0;
+    service.valor = transformMoneyToNumber(service.valor);
 
     services.push(service);
 
@@ -45,6 +47,7 @@ const useServices = (setServices) => {
     const index = services.findIndex((service) => service.id === id);
 
     services[index] = service;
+    service.valor = transformMoneyToNumber(service.valor);
 
     localStorage.setItem("services", JSON.stringify(services));
 

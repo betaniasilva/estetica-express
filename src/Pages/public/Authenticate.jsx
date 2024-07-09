@@ -50,9 +50,9 @@ export default function Authenticate() {
               className={cn(
                 "transition-all duration-100 font-bold w-full rounded-r-none",
                 {
-                  "bg-blue-primary text-white": !isLogin,
+                  "bg-blue-primary text-white": isLogin,
                   "bg-transparent border border-solid border-blue-primary text-blue-primary":
-                    isLogin,
+                    !isLogin,
                 }
               )}
             >
@@ -63,9 +63,9 @@ export default function Authenticate() {
               className={cn(
                 "transition-all duration-100 font-bold w-full rounded-l-none",
                 {
-                  "bg-blue-primary text-white": isLogin,
+                  "bg-blue-primary text-white": !isLogin,
                   "bg-transparent border border-solid border-blue-primary text-blue-primary":
-                    !isLogin,
+                    isLogin,
                 }
               )}
             >

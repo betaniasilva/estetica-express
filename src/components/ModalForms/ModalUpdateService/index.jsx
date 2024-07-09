@@ -22,7 +22,6 @@ const ModalUpdateService = ({ service, setServices, isOpen, onClose }) => {
 
   const handleEdit = form.handleSubmit((data) => {
     const services = update(service.id, data);
-    console.log(services);
 
     setServices(services);
     onClose();
